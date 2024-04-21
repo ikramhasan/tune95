@@ -18,7 +18,7 @@ export default function Home() {
     setQuery(event.target.value);
   }
 
-  function playSong(song: SearchResponse["data"]["songs"]["results"][0]): void {
+  function playSong(song: SearchResponse["data"]["results"][0]): void {
     console.log("Selected song", song);
 
     fetch(`https://saavn.dev/api/songs/${song.id}`).then((response) =>
@@ -34,7 +34,7 @@ export default function Home() {
       if (query === "") return;
       setLoading(true);
 
-      fetch(`https://saavn.dev/api/search?query=${query}`)
+      fetch(`https://saavn.dev/api/search/songs?query=${query}`)
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -64,7 +64,7 @@ export default function Home() {
         <FullScreenLoader />
       ) : searchResponse ? (
         <SongList
-          songs={searchResponse?.data.songs.results}
+          songs={searchResponse?.data.results}
           onClick={(song) => {
             playSong(song);
           }}

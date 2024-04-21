@@ -15,10 +15,10 @@ const AudioPlayer = ({ song }: AudioPlayerProps) => {
   const [duration, setDuration] = useState<number | undefined>(0);
   const [isPaused, setIsPaused] = useState<boolean>(false);
 
-  const shortcutHandler = useCallback(() => {
-    playOrPauseAudio();
-  }, []);
-  useGlobalShortcut("Space", shortcutHandler);
+  //   const shortcutHandler = useCallback(() => {
+  //     playOrPauseAudio();
+  //   }, []);
+  //   useGlobalShortcut("Space", shortcutHandler);
 
   function playOrPauseAudio(): void {
     if (audioRef.current?.paused) {
@@ -54,7 +54,7 @@ const AudioPlayer = ({ song }: AudioPlayerProps) => {
   }
 
   return (
-    <div className="absolute z-10 bottom-0 left-0 right-0 p-4">
+    <div className="sticky z-10 bottom-0 left-0 right-0 p-4 bg-background">
       <GroupBox className="flex flex-col gap-2" label="Now Playing">
         <audio
           ref={audioRef}
@@ -82,7 +82,10 @@ const AudioPlayer = ({ song }: AudioPlayerProps) => {
               />
             </Avatar>
             <div>
-              <h1 className="font-bold text-lg">{song.data[0].name}</h1>
+              <h1
+                className="font-bold text-lg"
+                dangerouslySetInnerHTML={{ __html: song.data[0].name }}
+              ></h1>
               <p className="text-gray-500">
                 {song.data[0].artists.primary[0].name}
               </p>

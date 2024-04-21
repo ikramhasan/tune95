@@ -1,88 +1,91 @@
 export interface SearchResponse {
   success: boolean;
-  data: DataClass;
+  data: Data;
 }
 
-export interface DataClass {
-  topQuery: Artists;
-  songs: Songs;
-  albums: Albums;
-  artists: Artists;
-  playlists: Playlists;
+export interface Data {
+  total: number;
+  start: number;
+  results: SongResult[];
 }
 
-export interface Albums {
-  results: AlbumsResult[];
-  position: number;
-}
-
-export interface AlbumsResult {
+export interface SongResult {
   id: string;
-  title: string;
-  image: Image[];
-  artist: string;
-  url: string;
-  type: string;
-  description: string;
+  name: string;
+  type: ResultType;
   year: string;
-  songIds: string;
-  language: string;
+  releaseDate: null;
+  duration: number;
+  label: string;
+  explicitContent: boolean;
+  playCount: number;
+  language: Language;
+  hasLyrics: boolean;
+  lyricsId: null;
+  url: string;
+  copyright: string;
+  album: Album;
+  artists: Artists;
+  image: DownloadURL[];
+  downloadUrl: DownloadURL[];
 }
 
-export interface Image {
+export interface Album {
+  id: string;
+  name: string;
+  url: string;
+}
+
+export interface Artists {
+  primary: All[];
+  featured: All[];
+  all: All[];
+}
+
+export interface All {
+  id: string;
+  name: string;
+  role: Role;
+  image: DownloadURL[];
+  type: AllType;
+  url: string;
+}
+
+export interface DownloadURL {
   quality: Quality;
   url: string;
 }
 
 export enum Quality {
+  The12Kbps = "12kbps",
   The150X150 = "150x150",
+  The160Kbps = "160kbps",
+  The320Kbps = "320kbps",
+  The48Kbps = "48kbps",
   The500X500 = "500x500",
   The50X50 = "50x50",
+  The96Kbps = "96kbps",
 }
 
-export interface Artists {
-  results: ArtistsResult[];
-  position: number;
+export enum Role {
+  FeaturedArtists = "featured_artists",
+  Lyricist = "lyricist",
+  Music = "music",
+  PrimaryArtists = "primary_artists",
+  Singer = "singer",
+  Starring = "starring",
 }
 
-export interface ArtistsResult {
-  id: string;
-  title: string;
-  image: Image[];
-  type: string;
-  description: string;
-  position?: number;
+export enum AllType {
+  Artist = "artist",
 }
 
-export interface Playlists {
-  results: PlaylistsResult[];
-  position: number;
+export enum Language {
+  English = "english",
+  Haryanvi = "haryanvi",
+  Hindi = "hindi",
 }
 
-export interface PlaylistsResult {
-  id: string;
-  title: string;
-  image: Image[];
-  url: string;
-  type: string;
-  language: string;
-  description: string;
-}
-
-export interface Songs {
-  results: SongsResult[];
-  position: number;
-}
-
-export interface SongsResult {
-  id: string;
-  title: string;
-  image: Image[];
-  album: string;
-  url: string;
-  type: string;
-  description: string;
-  primaryArtists: string;
-  singers: string;
-  language: string;
+export enum ResultType {
+  Song = "song",
 }

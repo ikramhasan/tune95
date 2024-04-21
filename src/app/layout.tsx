@@ -5,6 +5,8 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import localFont from "next/font/local";
 import original from "react95/dist/themes/original";
+import { CustomWindowDecorations } from "@/components/CustomWindowDecorations";
+import { Window } from "react95";
 
 const msSansSerif = localFont({
   variable: "--font-ms_sans_serif",
@@ -30,6 +32,7 @@ export default function RootLayout({
   return (
     <ThemeProvider theme={original}>
       <html lang="en">
+        {/* <CustomWindowDecorations /> */}
         <body className={msSansSerif.className}>{children}</body>
       </html>
     </ThemeProvider>

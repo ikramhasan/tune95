@@ -9,11 +9,11 @@ import {
   TableRow,
 } from "react95";
 import Image from "next/image";
-import { SongsResult } from "@/types/search.response";
+import { SongResult } from "@/types/search.response";
 
 type SongListComponentProps = {
-  songs: SongsResult[] | undefined;
-  onClick: (song: SongsResult) => void;
+  songs: SongResult[] | undefined;
+  onClick: (song: SongResult) => void;
 };
 
 const SongList = ({ songs, onClick }: SongListComponentProps) => {
@@ -51,13 +51,15 @@ const SongList = ({ songs, onClick }: SongListComponentProps) => {
                 </Avatar>
               </TableDataCell>
               <TableDataCell
-                dangerouslySetInnerHTML={{ __html: song.title }}
+                dangerouslySetInnerHTML={{ __html: song.name }}
               ></TableDataCell>
               <TableDataCell
-                dangerouslySetInnerHTML={{ __html: song.primaryArtists }}
+                dangerouslySetInnerHTML={{
+                  __html: song.artists.primary[0].name,
+                }}
               ></TableDataCell>
               <TableDataCell
-                dangerouslySetInnerHTML={{ __html: song.album }}
+                dangerouslySetInnerHTML={{ __html: song.album.name }}
               ></TableDataCell>
             </TableRow>
           ))}

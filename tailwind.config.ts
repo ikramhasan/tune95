@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        background: "#C6C6C6",
+      },
       fontFamily: {
         ms_sans_serif: ["var(--font-ms_sans_serif)", ...fontFamily.sans],
       },
