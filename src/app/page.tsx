@@ -27,6 +27,7 @@ export default function Home() {
   const [nowPlaying, setNowPlaying] = useState<SongResponse | null>(null);
   const [progress, setProgress] = useState<number>(0);
   const [duration, setDuration] = useState<number | undefined>(0);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -62,8 +63,10 @@ export default function Home() {
   function playOrPauseAudio(): void {
     if (audioRef.current?.paused) {
       audioRef.current?.play();
+      setIsPaused(false);
     } else {
       audioRef.current?.pause();
+      setIsPaused(true);
     }
   }
 
@@ -111,7 +114,7 @@ export default function Home() {
           <Hourglass className="w-32 h-32" />
         </div>
       ) : (
-        <Table>
+        <Table className="mb-2">
           <TableHead>
             <TableRow>
               <TableHeadCell>Cover</TableHeadCell>
@@ -158,7 +161,7 @@ export default function Home() {
       )}
 
       {nowPlaying && (
-        <div className="absolute z-10 bottom-0 left-0 right-0">
+        <div className="absolute z-10 bottom-0 left-0 right-0 p-4">
           <GroupBox className="flex flex-col gap-2" label="Now Playing">
             <audio
               ref={audioRef}
@@ -202,9 +205,7 @@ export default function Home() {
                     playOrPauseAudio();
                   }}
                 >
-                  <span role="img">
-                    {audioRef.current?.paused ? "►" : "⏸︎"}
-                  </span>
+                  <span role="img">{isPaused ? "►" : "⏸︎"}</span>
                 </Button>
                 <Button
                   variant="raised"
