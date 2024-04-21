@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Avatar, Button, GroupBox, Slider } from "react95";
 import Image from "next/image";
 import { SongResponse } from "@/types/song.response";
+import { useGlobalShortcut } from "@/hooks/tauri/shortcuts";
 
 type AudioPlayerProps = {
   song: SongResponse;
@@ -13,6 +14,11 @@ const AudioPlayer = ({ song }: AudioPlayerProps) => {
   const [progress, setProgress] = useState<number>(0);
   const [duration, setDuration] = useState<number | undefined>(0);
   const [isPaused, setIsPaused] = useState<boolean>(false);
+
+  const shortcutHandler = useCallback(() => {
+    playOrPauseAudio();
+  }, []);
+  useGlobalShortcut("Space", shortcutHandler);
 
   function playOrPauseAudio(): void {
     if (audioRef.current?.paused) {

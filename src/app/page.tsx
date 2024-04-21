@@ -5,7 +5,7 @@ import FullScreenLoader from "@/components/Loader";
 import SongList from "@/components/SongList";
 import { SearchResponse } from "@/types/search.response";
 import { SongResponse } from "@/types/song.response";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button, GroupBox, TextInput } from "react95";
 
 export default function Home() {
