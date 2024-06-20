@@ -1,4 +1,4 @@
-# tun95
+# tune95
 
 A nostalgia induced windows 95 theme free music streaming app made with Rust and NextJS
 
